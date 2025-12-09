@@ -22,13 +22,13 @@ jobs:
       - run: pnpm install
 
       # 4️⃣ Builder l’application Angular
-      - run: pnpm run build
+      - run: pnpm run build --if-present
 
       # 5️⃣ Déployer sur Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BABY_TRACKER_86A4A }}
-          channelId: pr-${{ github.event.number }}
+          channelId: live   # 'live' pour production, ou pr-${{ github.event.number }} pour preview
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
