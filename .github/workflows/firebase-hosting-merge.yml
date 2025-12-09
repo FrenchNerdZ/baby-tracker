@@ -22,7 +22,7 @@ jobs:
       - run: pnpm install
 
       # 4️⃣ Builder l’application Angular
-      - run: pnpm run build --if-present
+      - run: pnpm run build --configuration production
 
       # 5️⃣ Déployer sur Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
