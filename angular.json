@@ -78,14 +78,6 @@
           "options": {
             "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "version": 2,
-            "site": "baby-tracker-86a4a",
-            "buildTarget": "baby-tracker:build:production"
-          }
         }
       }
     }
