@@ -6,10 +6,8 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "source": "./baby-tracker",
+    "public": "dist/baby-tracker/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "frameworksBackend": {
-      "region": "us-central1"
-    }
+    "cleanUrls": true
   }
 }
