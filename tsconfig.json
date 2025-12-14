@@ -12,8 +12,44 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
+    "baseUrl": ".",
     "paths": {
-      "@spartan-ng/helm/utils": ["./libs/ui/utils/src/index.ts"]
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@login/*": [
+        "src/app/feature/login/*"
+      ],
+      "@spartan-ng/helm/card": [
+        "./libs/ui/card/src/index.ts"
+      ],
+      "@spartan-ng/helm/utils": [
+        "./libs/ui/utils/src/index.ts"
+      ],
+      "@spartan-ng/helm/button": [
+        "./libs/ui/button/src/index.ts"
+      ],
+      "@spartan-ng/helm/form-field": [
+        "./libs/ui/form-field/src/index.ts"
+      ],
+      "@spartan-ng/helm/input": [
+        "./libs/ui/input/src/index.ts"
+      ],
+      "@spartan-ng/helm/field": [
+        "./libs/ui/field/src/index.ts"
+      ],
+      "@spartan-ng/helm/label": [
+        "./libs/ui/label/src/index.ts"
+      ],
+      "@spartan-ng/helm/separator": [
+        "./libs/ui/separator/src/index.ts"
+      ],
+      "@spartan-ng/helm/alert": [
+        "./libs/ui/alert/src/index.ts"
+      ],
+      "@spartan-ng/helm/icon": [
+        "./libs/ui/icon/src/index.ts"
+      ]
     }
   },
   "angularCompilerOptions": {
