@@ -47,6 +47,10 @@ export default defineConfig({
         find: '@spartan-ng/helm/icon',
         replacement: path.resolve(__dirname, 'libs/ui/icon/src/index.ts'),
       },
+      {
+        find: '@spartan-ng/helm/toast',
+        replacement: path.resolve(__dirname, 'libs/ui/toast/src/index.ts'),
+      },
     ],
   },
 
@@ -58,7 +62,7 @@ export default defineConfig({
     reporters: ['default'],
     coverage: {
       provider: 'v8',
-      exclude: ['lib/**', '**/*.d.ts', '**/node_modules/**'],
+      exclude: ['lib/**', '**/*.d.ts', '**/node_modules/**', 'window.helper.ts'],
     },
   },
 });
