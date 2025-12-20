@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { UpdateService } from '@core/update/service/update.service';
 import { UpdateStore } from '@core/update/store/update.store';
 import { HlmToaster } from '@spartan-ng/helm/sonner';
@@ -8,6 +8,7 @@ import { toast } from 'ngx-sonner';
   selector: 'bt-update-sonner',
   imports: [HlmToaster],
   templateUrl: './update-sonner.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateSonner {
   private readonly updateStore = inject(UpdateStore);

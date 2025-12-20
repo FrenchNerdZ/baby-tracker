@@ -1,21 +1,22 @@
-import { AuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { Routes } from '@angular/router';
-
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
+import { authGuard } from '@core/auth/guard/auth.guard';
+import { redirectAuthGuard } from '@core/auth/guard/redirect-auth.guard';
 
 export const routes: Routes = [
   {
-    path: 'login',
-    loadComponent: () => import('./feature/login/login').then((m) => m.Login),
-    canActivate: [AuthGuard],
-    data: { authGuardPipe: redirectLoggedInToDashboard },
+    path: 'sign-in',
+    loadComponent: () => import('./feature/sign/component/sign-in/sign-in').then((m) => m.SignIn),
+    canActivate: [redirectAuthGuard],
+  },
+  {
+    path: 'sign-up',
+    loadComponent: () => import('./feature/sign/component/sign-up/sign-up').then((m) => m.SignUp),
+    canActivate: [redirectAuthGuard],
   },
   {
     path: 'dashboard',
     loadComponent: () => import('./feature/dashboard/dashboard').then((m) => m.Dashboard),
-    canActivate: [AuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    canActivate: [authGuard],
   },
-  { path: '**', redirectTo: 'login' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
