@@ -17,8 +17,8 @@
       "@core/*": [
         "src/app/core/*"
       ],
-      "@login/*": [
-        "src/app/feature/login/*"
+      "@sign/*": [
+        "src/app/feature/sign/*"
       ],
       "@spartan-ng/helm/card": [
         "./libs/ui/card/src/index.ts"

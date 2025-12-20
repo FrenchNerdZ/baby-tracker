@@ -24,7 +24,9 @@ export default [
       ],
       processor: angular.processInlineTemplates,
       rules: {
+        'unicorn/no-useless-undefined': 'off',
         '@angular-eslint/component-class-suffix': 'off',
+        '@angular-eslint/prefer-on-push-component-change-detection': 'error',
         '@angular-eslint/directive-selector': [
           'error',
           {

@@ -1,12 +1,8 @@
 <div class="min-h-screen grid place-items-center">
   <section class="w-full max-w-sm" hlmCard>
     <div hlmCardHeader>
-      <h3 hlmCardTitle>Login to your account</h3>
-      <p hlmCardDescription>Enter your email below to login to your account</p>
-
-      <div hlmCardAction>
-        <button hlmBtn variant="link">Sign Up</button>
-      </div>
+      <h3 hlmCardTitle>Sign in to your account</h3>
+      <p hlmCardDescription>Enter your email below to sign in to your account</p>
     </div>
 
     <div hlmCardContent>
@@ -15,43 +11,47 @@
           @if (error(); as error) {
             <div hlmAlert variant="destructive">
               <ng-icon hlmAlertIcon name="lucideCircleAlert" />
-              <h4 hlmAlertTitle>Login Error</h4>
+              <h4 hlmAlertTitle>Signin Error</h4>
               <div hlmAlertDescription>{{ error }}</div>
             </div>
           }
 
           <div hlmField class="grid gap-2">
-            <label hlmFieldLabel for="field-input-login-email">Email</label>
+            <label hlmFieldLabel for="field-input-sign-in-email">Email</label>
             <input
               hlmInput
-              id="field-input-login-email"
+              id="field-input-sign-in-email"
               type="email"
               placeholder="m@example.com"
-              [field]="loginForm.email"
+              [field]="signInForm.email"
             />
-            @if (loginForm.email().touched() && loginForm.email().invalid()) {
-              @for (error of loginForm.email().errors(); track error) {
+            @if (signInForm.email().touched() && signInForm.email().invalid()) {
+              @for (error of signInForm.email().errors(); track error) {
                 <hlm-error>{{ error.message }}</hlm-error>
               }
             }
           </div>
           <div hlmField class="grid gap-2">
             <div class="flex items-center">
-              <label hlmFieldLabel for="field-input-login-password">Password</label>
-              <a href="#" class="ml-auto inline-block text-sm underline-offset-4 hover:underline">
+              <label hlmFieldLabel for="field-input-sign-in-password">Password</label>
+              <a
+                href="#"
+                id="link-forgot-password"
+                class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+              >
                 Forgot your password?
               </a>
             </div>
             <input
               hlmInput
-              id="field-input-login-password"
+              id="field-input-sign-in-password"
               type="password"
               placeholder="••••••••"
-              [field]="loginForm.password"
+              [field]="signInForm.password"
             />
 
-            @if (loginForm.password().touched() && loginForm.password().invalid()) {
-              @for (error of loginForm.password().errors(); track error) {
+            @if (signInForm.password().touched() && signInForm.password().invalid()) {
+              @for (error of signInForm.password().errors(); track error) {
                 <hlm-error>{{ error.message }}</hlm-error>
               }
             }
@@ -62,24 +62,19 @@
     <div hlmCardFooter class="flex-col gap-2">
       <button
         hlmBtn
+        id="submit-sign-in"
         type="submit"
         class="w-full"
         (click)="submit($event)"
-        [disabled]="loading() || loginForm().invalid()"
+        [disabled]="loading() || signInForm().invalid()"
       >
-        {{ loading() ? 'Logging in...' : 'Login' }}
+        Sign In
       </button>
 
-      <button
-        hlmBtn
-        variant="outline"
-        class="w-full"
-        type="button"
-        [disabled]="loading()"
-        (click)="loginWithGoogle()"
-      >
-        {{ loading() ? 'Please wait...' : 'Login with Google' }}
-      </button>
+      <p>
+        Don't have an account?
+        <a href="#" id="link-navigate-sign-up" (click)="navigateToSignUp()">Sign Up</a>
+      </p>
     </div>
   </section>
 </div>

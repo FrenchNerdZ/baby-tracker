@@ -1,7 +1,8 @@
 import { inject } from '@angular/core';
-import { User } from '@angular/fire/auth';
-import { Router } from '@angular/router';
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { AuthService } from '@core/auth/service/auth.service';
+import { SignInPayload, SignUpPayload } from '@core/type/auth.type';
+import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
+import { User } from '@supabase/supabase-js';
 
 interface AuthState {
   user: User | undefined;
@@ -13,25 +14,39 @@ export const AuthStore = signalStore(
   { providedIn: 'root' },
   withState<AuthState>({
     user: undefined,
-    loading: true,
+    loading: false,
     error: undefined,
   }),
-  withMethods((store, router = inject(Router)) => ({
-    setLoading(loading: boolean) {
-      patchState(store, { loading });
+  withMethods((store, authService = inject(AuthService)) => ({
+    async signInWithEmail(payload: SignInPayload) {
+      patchState(store, { loading: true, error: undefined });
+      const { error } = await authService.signInWithEmail(payload);
+      if (error) patchState(store, { loading: false, error: error.message });
     },
-    setUser(user: User | undefined): void {
-      patchState(store, { user, loading: false });
-      if (user) {
-        router.navigate(['/', 'dashboard']).catch(console.error);
-      }
+
+    async signUpWithEmail(payload: SignUpPayload) {
+      patchState(store, { loading: true, error: undefined });
+      const { error } = await authService.signUpWithEmail(payload);
+      if (error) patchState(store, { loading: false, error: error.message });
     },
-    setError(error: string): void {
-      patchState(store, { error, loading: false });
+
+    async signOut() {
+      await authService.signOut();
     },
-    logout(): void {
-      patchState(store, { user: undefined });
-      router.navigate(['/', 'login']).catch(console.error);
+  })),
+  withHooks((store, authService = inject(AuthService)) => ({
+    async onInit() {
+      const { data } = await authService.session;
+      patchState(store, { user: data.session?.user, loading: false });
+
+      authService.onAuthStateChange((_event, session) => {
+        if (store.user()?.id !== session?.user.id) {
+          patchState(store, {
+            user: session?.user,
+            loading: false,
+          });
+        }
+      });
     },
   })),
 );

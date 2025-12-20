@@ -1,14 +1,14 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { email, Field, form, required, SchemaPathTree } from '@angular/forms/signals';
-import { AuthService } from '@core/auth/service/auth.service';
+import { Router } from '@angular/router';
 import { AuthStore } from '@core/auth/store/auth.store';
+import { SignInPayload } from '@core/type/auth.type';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCircleAlert } from '@ng-icons/lucide';
 import { HlmAlert, HlmAlertDescription, HlmAlertIcon, HlmAlertTitle } from '@spartan-ng/helm/alert';
 import { HlmButton } from '@spartan-ng/helm/button';
 import {
   HlmCard,
-  HlmCardAction,
   HlmCardContent,
   HlmCardDescription,
   HlmCardFooter,
@@ -18,10 +18,9 @@ import {
 import { HlmField, HlmFieldGroup, HlmFieldLabel } from '@spartan-ng/helm/field';
 import { HlmError } from '@spartan-ng/helm/form-field';
 import { HlmInput } from '@spartan-ng/helm/input';
-import { LoginData } from './type/login.type';
 
 @Component({
-  selector: 'bt-login',
+  selector: 'bt-sign-in',
   imports: [
     Field,
     HlmButton,
@@ -29,7 +28,6 @@ import { LoginData } from './type/login.type';
     HlmCard,
     HlmCardTitle,
     HlmCardDescription,
-    HlmCardAction,
     HlmCardContent,
     HlmCardFooter,
     HlmError,
@@ -44,25 +42,25 @@ import { LoginData } from './type/login.type';
     HlmAlertTitle,
   ],
   providers: [provideIcons({ lucideCircleAlert })],
-
-  templateUrl: './login.html',
+  templateUrl: './sign-in.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Login {
-  private readonly loginModel = signal<LoginData>({
+export class SignIn {
+  private readonly signInModel = signal<SignInPayload>({
     email: '',
     password: '',
   });
 
-  private readonly loginSchema = (schemaPath: SchemaPathTree<LoginData>) => {
+  private readonly signInSchema = (schemaPath: SchemaPathTree<SignInPayload>) => {
     required(schemaPath.email, { message: 'Email is required' });
     email(schemaPath.email, { message: 'Enter a valid email address' });
     required(schemaPath.password, { message: 'Password is required' });
   };
 
   private readonly authStore = inject(AuthStore);
-  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
-  protected loginForm = form(this.loginModel, this.loginSchema);
+  protected signInForm = form(this.signInModel, this.signInSchema);
 
   protected loading = this.authStore.loading;
   protected error = this.authStore.error;
@@ -70,11 +68,14 @@ export class Login {
   protected submit(event: Event): void {
     event.preventDefault();
 
-    const { email, password } = this.loginModel();
-    this.authService.login(email, password).catch(console.error);
+    this.authStore
+      .signInWithEmail(this.signInModel())
+      .catch((error) => console.error('Sign in failed:', error));
   }
 
-  protected loginWithGoogle(): void {
-    this.authService.loginWithGoogle().catch(console.error);
+  protected navigateToSignUp(): void {
+    this.router.navigate(['/sign-up']).catch((error) => {
+      console.error('Navigation failed:', '/sign-up', error);
+    });
   }
 }
