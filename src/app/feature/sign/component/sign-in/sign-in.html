@@ -68,6 +68,9 @@
         (click)="submit($event)"
         [disabled]="loading() || signInForm().invalid()"
       >
+        @if (loading()) {
+          <hlm-spinner />
+        }
         Sign In
       </button>
 

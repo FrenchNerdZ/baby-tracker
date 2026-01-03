@@ -1,7 +1,7 @@
-import { Directive, computed, input, signal } from '@angular/core';
+import { computed, Directive, input, signal } from '@angular/core';
 import { BrnButton } from '@spartan-ng/brain/button';
 import { hlm } from '@spartan-ng/helm/utils';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
 import { injectBrnButtonConfig } from './hlm-button.token';
 
@@ -26,6 +26,7 @@ export const buttonVariants = cva(
         icon: 'size-9',
         'icon-sm': 'size-8',
         'icon-lg': 'size-10',
+        floating: 'size-12 ',
       },
     },
     defaultVariants: {

@@ -47,14 +47,14 @@ describe('App', () => {
   });
 
   describe('when user is defined', () => {
-    it('should navigate to dashboard when user is set', () => {
+    it('should navigate to babies list when user is set', () => {
       vi.spyOn(router, 'navigate').mockResolvedValue(true);
 
       userSignal.set({ id: '123' } as User);
 
       TestBed.tick();
 
-      expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
+      expect(router.navigate).toHaveBeenCalledWith(['/babies']);
     });
 
     it('should log error if navigation fails', async () => {
@@ -68,8 +68,8 @@ describe('App', () => {
 
       await Promise.resolve();
 
-      expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
-      expect(spyConsoleError).toHaveBeenCalledWith('Navigation failed:', '/dashboard', error);
+      expect(router.navigate).toHaveBeenCalledWith(['/babies']);
+      expect(spyConsoleError).toHaveBeenCalledWith('Navigation failed:', '/babies', error);
     });
 
     it('should not navigate if user is undefined', async () => {

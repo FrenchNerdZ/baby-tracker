@@ -18,6 +18,7 @@ import {
 import { HlmField, HlmFieldGroup, HlmFieldLabel } from '@spartan-ng/helm/field';
 import { HlmError } from '@spartan-ng/helm/form-field';
 import { HlmInput } from '@spartan-ng/helm/input';
+import { HlmSpinner } from '@spartan-ng/helm/spinner';
 
 @Component({
   selector: 'bt-sign-in',
@@ -40,6 +41,7 @@ import { HlmInput } from '@spartan-ng/helm/input';
     HlmAlertIcon,
     HlmAlertDescription,
     HlmAlertTitle,
+    HlmSpinner,
   ],
   providers: [provideIcons({ lucideCircleAlert })],
   templateUrl: './sign-in.html',

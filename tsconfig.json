@@ -20,6 +20,18 @@
       "@sign/*": [
         "src/app/feature/sign/*"
       ],
+      "@baby/*": [
+        "src/app/feature/baby/*"
+      ],
+      "@day/*": [
+        "src/app/feature/day/*"
+      ],
+      "@event/*": [
+        "src/app/feature/event/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
       "@spartan-ng/helm/card": [
         "./libs/ui/card/src/index.ts"
       ],
@@ -52,6 +64,45 @@
       ],
       "@spartan-ng/helm/sonner": [
         "./libs/ui/sonner/src/index.ts"
+      ],
+      "@spartan-ng/helm/empty": [
+        "./libs/ui/empty/src/index.ts"
+      ],
+      "@spartan-ng/helm/item": [
+        "./libs/ui/item/src/index.ts"
+      ],
+      "@spartan-ng/helm/avatar": [
+        "./libs/ui/avatar/src/index.ts"
+      ],
+      "@spartan-ng/helm/badge": [
+        "./libs/ui/badge/src/index.ts"
+      ],
+      "@spartan-ng/helm/floating-button": [
+        "./libs/ui/floating-button/src/index.ts"
+      ],
+      "@spartan-ng/helm/sheet": [
+        "./libs/ui/sheet/src/index.ts"
+      ],
+      "@spartan-ng/helm/textarea": [
+        "./libs/ui/textarea/src/index.ts"
+      ],
+      "@spartan-ng/helm/date-picker": [
+        "./libs/ui/date-picker/src/index.ts"
+      ],
+      "@spartan-ng/helm/calendar": [
+        "./libs/ui/calendar/src/index.ts"
+      ],
+      "@spartan-ng/helm/popover": [
+        "./libs/ui/popover/src/index.ts"
+      ],
+      "@spartan-ng/helm/spinner": [
+        "./libs/ui/spinner/src/index.ts"
+      ],
+      "@spartan-ng/helm/select": [
+        "./libs/ui/select/src/index.ts"
+      ],
+      "@spartan-ng/helm/radio-group": [
+        "./libs/ui/radio-group/src/index.ts"
       ]
     }
   },

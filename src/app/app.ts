@@ -16,8 +16,8 @@ export class App {
   constructor() {
     effect(() => {
       if (this.authStore.user()) {
-        this.router.navigate(['/dashboard']).catch((error) => {
-          console.error('Navigation failed:', '/dashboard', error);
+        this.router.navigate(['/babies']).catch((error) => {
+          console.error('Navigation failed:', '/babies', error);
         });
       }
     });

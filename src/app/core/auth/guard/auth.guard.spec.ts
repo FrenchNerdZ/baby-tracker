@@ -42,11 +42,11 @@ describe('redirectAuthGuard', () => {
       redirectAuthGuard(activatedRouteSnapshotMock, routerStateSnapshotMock),
     );
 
-    expect(router.createUrlTree).toHaveBeenCalledWith(['/dashboard']);
+    expect(router.createUrlTree).toHaveBeenCalledWith(['/babies']);
     expect(result).toBe(urlTreeMock);
   });
 
-  it('should redirect to dashboard when user is authenticated', () => {
+  it('should redirect to babies list when user is authenticated', () => {
     userSignal.set(undefined);
 
     const result = TestBed.runInInjectionContext(() =>

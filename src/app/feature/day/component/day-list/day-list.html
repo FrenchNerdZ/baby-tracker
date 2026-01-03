@@ -1,0 +1,62 @@
+@for (day of days(); track day.date) {
+  <a hlmItem href="#" [routerLink]="[day.date]">
+    <div hlmItemContent>
+      <div hlmItemTitle>{{ day.date | relativeDate }}</div>
+      <p hlmItemDescription class="flex gap-2">
+        @if (day.total_milk; as total_milk) {
+          <span hlmBadge variant="default">
+            <ng-icon name="lucideMilk" />
+            {{ total_milk }} ml
+            @if ($first) {
+              : {{ day.last_milk_bottle | timeAgo }}
+            }
+          </span>
+        }
+        @if (day.total_pee; as total_pee) {
+          <span hlmBadge variant="default">
+            <ng-icon name="lucideDroplets" />
+            {{ total_pee }}
+          </span>
+        }
+        @if (day.total_poop; as total_poop) {
+          <span hlmBadge variant="default">
+            <ng-icon name="lucideRadiation" />
+            {{ total_poop }}
+          </span>
+        }
+        @if (day.total_medicine; as total_medicine) {
+          <span hlmBadge variant="default">
+            <ng-icon name="lucidePill" />
+            {{ total_medicine }}
+          </span>
+        }
+        @if (day.total_bath; as total_bath) {
+          <span hlmBadge variant="default">
+            <ng-icon name="lucideBath" />
+            {{ total_bath }}
+          </span>
+        }
+      </p>
+    </div>
+    <div hlmItemActions>
+      <ng-icon hlm name="lucideChevronRight" size="sm" />
+    </div>
+  </a>
+} @empty {
+  <div hlmEmpty>
+    <div hlmEmptyHeader>
+      <div hlmEmptyMedia variant="icon">
+        <ng-icon name="lucideFolderCode" />
+      </div>
+      <div hlmEmptyTitle>No Projects Yet</div>
+      <div hlmEmptyDescription>
+        You haven&apos;t created any projects yet. Get started by creating your first project.
+      </div>
+    </div>
+    <div hlmEmptyContent>
+      <div class="flex gap-2">
+        <button hlmBtn>Add Activity</button>
+      </div>
+    </div>
+  </div>
+}

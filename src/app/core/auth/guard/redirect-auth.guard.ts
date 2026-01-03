@@ -6,5 +6,5 @@ export const redirectAuthGuard: CanActivateFn = () => {
   const authStore = inject(AuthStore);
   const router = inject(Router);
 
-  return authStore.user() ? router.createUrlTree(['/dashboard']) : true;
+  return authStore.user() ? router.createUrlTree(['/babies']) : true;
 };

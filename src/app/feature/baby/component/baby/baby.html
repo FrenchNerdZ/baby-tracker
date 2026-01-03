@@ -1,0 +1,14 @@
+<bt-app-title-bar>
+  <p>{{ babyName() }}</p>
+</bt-app-title-bar>
+
+<router-outlet />
+<router-outlet name="sheet" />
+
+<hlm-floating-button>
+  <hlm-floating-sub-button icon="lucideMilk" [action]="addMilk" />
+  <hlm-floating-sub-button icon="lucideDroplets" [action]="addPee" />
+  <hlm-floating-sub-button icon="lucideRadiation️" [action]="addPoop" />
+  <hlm-floating-sub-button icon="lucidePill" [action]="addMedicine" />
+  <hlm-floating-sub-button icon="lucideBath" [action]="addBath" />
+</hlm-floating-button>

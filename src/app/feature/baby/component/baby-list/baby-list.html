@@ -1,0 +1,44 @@
+<bt-app-title-bar>
+  <p>Babies</p>
+</bt-app-title-bar>
+
+<div hlmItemGroup class="w-full px-4 md:max-w-5xl md:mx-auto gap-4">
+  @for (baby of babies(); track baby.id) {
+    <a hlmItem variant="outline" role="listitem" href="#" [routerLink]="[baby.id]">
+      <div hlmItemMedia variant="icon">
+        <ng-icon hlm name="lucideBaby" size="sm" />
+      </div>
+
+      <div hlmItemContent>
+        <div hlmItemTitle class="line-clamp-1">{{ baby.name }}</div>
+        <p hlmItemDescription>{{ 'Bébé Merveilleux' }}</p>
+      </div>
+
+      <div hlmItemContent class="flex-none text-center">
+        <p hlmItemDescription>{{ baby.birth_date | date: 'dd/MM/yyyy' }}</p>
+      </div>
+    </a>
+  } @empty {
+    <div hlmEmpty>
+      <div hlmEmptyHeader>
+        <div hlmEmptyMedia variant="icon">
+          <ng-icon name="lucideFolderCode" />
+        </div>
+        <div hlmEmptyTitle>No Projects Yet</div>
+        <div hlmEmptyDescription>
+          You haven&apos;t created any projects yet. Get started by creating your first project.
+        </div>
+      </div>
+      <div hlmEmptyContent>
+        <div class="flex gap-2">
+          <button hlmBtn>Create Project</button>
+          <button hlmBtn variant="outline">Import Project</button>
+        </div>
+      </div>
+      <button hlmBtn class="text-muted-foreground" variant="link" size="sm">
+        Learn More
+        <ng-icon hlm name="lucideArrowUpRight" size="sm" />
+      </button>
+    </div>
+  }
+</div>

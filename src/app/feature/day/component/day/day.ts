@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'bt-dashboard',
+  selector: 'bt-day',
   imports: [],
-  templateUrl: './dashboard.html',
+  templateUrl: './day.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Dashboard {}
+export class Day {}

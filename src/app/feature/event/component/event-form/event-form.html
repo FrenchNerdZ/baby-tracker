@@ -1,0 +1,162 @@
+<div class="grid flex-1 auto-rows-min gap-6 px-4">
+  <form>
+    <div hlmFieldGroup class="flex flex-col gap-6">
+      @if (error(); as error) {
+        <div hlmAlert variant="destructive">
+          <ng-icon hlmAlertIcon name="lucideCircleAlert" />
+          <h4 hlmAlertTitle>Saved Error</h4>
+          <div hlmAlertDescription>{{ error }}</div>
+        </div>
+      }
+
+      <div hlmField class="grid gap-2">
+        <div hlmField class="grid gap-2">
+          <hlm-radio-group class="grid grid-cols-5 gap-4" [field]="eventForm.event_type">
+            <label
+              for="field-radio-event-form-type-milk"
+              class="flex items-center"
+              hlmLabel
+              [class]="cardClass"
+            >
+              <hlm-radio id="field-radio-event-form-type-milk" value="milk">
+                <ng-icon hlm name="lucideMilk" class="mb-3" />
+              </hlm-radio>
+              Milk
+            </label>
+            <label
+              for="field-radio-event-form-type-pee"
+              class="flex items-center"
+              hlmLabel
+              [class]="cardClass"
+            >
+              <hlm-radio id="field-radio-event-form-type-pee" value="pee">
+                <ng-icon hlm name="lucideDroplets" class="mb-3" />
+              </hlm-radio>
+              Pee
+            </label>
+            <label
+              for="field-radio-event-form-type-poop"
+              class="flex items-center"
+              hlmLabel
+              [class]="cardClass"
+            >
+              <hlm-radio id="field-radio-event-form-type-poop" value="poop">
+                <ng-icon hlm name="lucideRadiation️" class="mb-3" />
+              </hlm-radio>
+              Poop
+            </label>
+            <label
+              for="field-radio-event-form-type-medicine"
+              class="flex items-center"
+              hlmLabel
+              [class]="cardClass"
+            >
+              <hlm-radio id="field-radio-event-form-type-medicine" value="medicine">
+                <ng-icon hlm name="lucidePill" class="mb-3" />
+              </hlm-radio>
+              Medicine
+            </label>
+            <label
+              for="field-radio-event-form-type-bath"
+              class="flex items-center"
+              hlmLabel
+              [class]="cardClass"
+            >
+              <hlm-radio id="field-radio-event-form-type-bath" value="bath">
+                <ng-icon hlm name="lucideBath" class="mb-3" />
+              </hlm-radio>
+              Bath
+            </label>
+          </hlm-radio-group>
+          @if (eventForm.event_type().touched() && eventForm.event_type().invalid()) {
+            @for (error of eventForm.event_type().errors(); track error) {
+              <hlm-error>{{ error.message }}</hlm-error>
+            }
+          }
+        </div>
+
+        <div class="flex gap-4">
+          <div class="flex flex-col gap-3">
+            <label hlmFieldLabel for="field-date-picker-event-form-date-button">Date</label>
+            <hlm-date-picker
+              id="field-date-picker-event-form-date"
+              buttonId="field-date-picker-event-form-date-button"
+              [field]="eventForm.event_date"
+            >
+              <span>Select date</span>
+            </hlm-date-picker>
+            @if (eventForm.event_date().touched() && eventForm.event_date().invalid()) {
+              @for (error of eventForm.event_date().errors(); track error) {
+                <hlm-error>{{ error.message }}</hlm-error>
+              }
+            }
+          </div>
+
+          <div class="flex flex-col gap-3">
+            <label hlmFieldLabel for="field-date-picker-event-form-time">Time</label>
+            <input
+              hlmInput
+              id="field-date-picker-event-form-time"
+              type="time"
+              step="1"
+              class="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+              [field]="eventForm.event_time"
+            />
+            @if (eventForm.event_time().touched() && eventForm.event_time().invalid()) {
+              @for (error of eventForm.event_time().errors(); track error) {
+                <hlm-error>{{ error.message }}</hlm-error>
+              }
+            }
+          </div>
+        </div>
+      </div>
+
+      @if (eventForm.event_type().value() === 'milk') {
+        <div hlmField class="grid gap-2">
+          <label hlmFieldLabel for="field-input-event-form-quantity">Quantity</label>
+          <input
+            hlmInput
+            id="field-input-event-form-quantity"
+            type="number"
+            placeholder="0"
+            [field]="eventForm.quantity"
+          />
+          @if (eventForm.quantity().touched() && eventForm.quantity().invalid()) {
+            @for (error of eventForm.quantity().errors(); track error) {
+              <hlm-error>{{ error.message }}</hlm-error>
+            }
+          }
+        </div>
+      }
+      <div hlmField class="grid gap-2">
+        <label hlmFieldLabel for="field-input-sign-in-email">Notes</label>
+        <textarea
+          hlmTextarea
+          class="w-80"
+          id="field-textarea-event-form-note"
+          [field]="eventForm.notes"
+        ></textarea>
+        @if (eventForm.notes().touched() && eventForm.notes().invalid()) {
+          @for (error of eventForm.notes().errors(); track error) {
+            <hlm-error>{{ error.message }}</hlm-error>
+          }
+        }
+      </div>
+    </div>
+  </form>
+</div>
+<hlm-sheet-footer>
+  <button
+    hlmBtn
+    id="submit-event"
+    type="submit"
+    class="w-full"
+    (click)="submit($event)"
+    [disabled]="loading() || eventForm().invalid()"
+  >
+    @if (loading()) {
+      <hlm-spinner />
+    }
+    Save
+  </button>
+</hlm-sheet-footer>
